@@ -3,7 +3,7 @@ from pathlib import Path
 
 
 @dataclass(frozen=True)
-class Fileinfo:
+class FileInfo:
     path: Path
     filename: str
     extension: str
