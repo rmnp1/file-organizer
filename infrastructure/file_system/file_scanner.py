@@ -19,7 +19,7 @@ class FileScanner:
         try:
             for path in dir_path.iterdir():
                 if path.is_file():
-                    results.append(FileInfo(path))
+                    results.append(FileInfo.from_path(path))
         except OSError as e:
             logger.error(f"Error scanning directory '{directory}': {e}")
 
