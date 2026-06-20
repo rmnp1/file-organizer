@@ -8,4 +8,5 @@ class FileClassifier:
         self.extensions = EXTENSION_MAPPING
 
     def classify(self, extension: str) -> str:
-        return self.extensions.get(extension.lower(), "Other")
+        normalized = extension.lower().lstrip(".")
+        return self.extensions.get(normalized, "Other")
