@@ -21,7 +21,7 @@ class LoggingConfiguration:
         if not logger.handlers:
             handler = logging.StreamHandler()
 
-            formatter = JsonFormatter(["asctime", "levelname", "message"])
+            formatter = JsonFormatter(["asctime", "levelname", "message"], json_ensure_ascii=False)
 
             handler.setFormatter(formatter)
             logger.addHandler(handler)

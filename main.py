@@ -1,4 +1,5 @@
 from pathlib import Path
+import logging
 
 from application.organize_files_use_case import OrganizeFilesUseCase
 from application.services.file_classifier import FileClassifier
@@ -6,14 +7,18 @@ from infrastructure.file_system.file_scanner import FileScanner
 from infrastructure.file_system.file_mover import FileMover
 from infrastructure.logging.logging_configuration import LoggingConfiguration
 
+logger = logging.getLogger(__name__)
+
 def get_directory() -> Path:
-    directory = Path(input("Enter the directory to organize: ").strip())
+    directory = Path(input("Enter the directory to organize: ").strip()).expanduser().resolve()
     return directory
 
 def main() -> None:
     LoggingConfiguration.setup()
 
     directory = get_directory()
+
+    logger.info("Organizing files started.")
 
     mover = FileMover()
     classifier = FileClassifier()

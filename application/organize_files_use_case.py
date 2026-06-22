@@ -22,13 +22,15 @@ class OrganizeFilesUseCase:
 
         files = self._scanner.scan(directory)
 
+        if not files:
+            logger.warning("No files found in the specified directory.")
+            return
+
         logger.info(f"Found {len(files)} files to organize.")
 
         for file in files:
             try:
-
                 category = self._classifier.classify(file.extension)
-
                 destination_dir = directory / category
 
                 self._mover.move(
