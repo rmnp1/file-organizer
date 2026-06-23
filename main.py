@@ -14,6 +14,11 @@ def get_directory() -> Path:
     return directory
 
 def main() -> None:
+    """
+    Initializes application components
+    and starts the file organization process.
+    """
+
     LoggingConfiguration.setup()
 
     directory = get_directory()
