@@ -31,7 +31,7 @@ The project follows a layered architecture that separates business logic, domain
 ### Architecture Diagram
 
 <p align="center">
-  <img src="docs/file-organizer-architecrure.svg" alt="File Organizer Architecture Diagram" width="900">
+  <img src="file-organizer-architecrure.svg" alt="File Organizer Architecture Diagram" width="900">
 </p>
 
 ### Project Structure
