@@ -28,6 +28,12 @@ The application scans a directory, classifies files (images, documents, videos, 
 
 The project follows a layered architecture that separates business logic, domain rules, and infrastructure concerns into independent layers.
 
+### Architecture Diagram
+
+<p align="center">
+  <img src="docs/file-organizer-architecrure.svg" alt="File Organizer Architecture Diagram" width="900">
+</p>
+
 ### Project Structure
 
 ```text
