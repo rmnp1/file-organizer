@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 import logging
 
@@ -10,8 +11,10 @@ from infrastructure.logging.logging_configuration import LoggingConfiguration
 logger = logging.getLogger(__name__)
 
 def get_directory() -> Path:
-    directory = Path(input("Enter the directory to organize: ").strip()).expanduser().resolve()
-    return directory
+    directory_env = os.getenv("TARGET_DIR")
+
+    directory_raw = directory_env if directory_env else input("Enter the directory to organize: ")
+    return Path(directory_raw.strip()).expanduser().resolve()
 
 def main() -> None:
     """
