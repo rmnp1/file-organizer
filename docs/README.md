@@ -1,11 +1,12 @@
 # File Organizer
 
-A Python application that automatically organizes files inside a directory by categorizing them into dedicated folders based on their file extensions.
+A console-based Python application that automatically organizes files into categorized directories based on their extensions.
 
-The application scans a directory, classifies files (images, documents, videos, archives, audio files, and more), and moves them into corresponding folders to maintain a clean and structured filesystem.
+The project demonstrates a layered architecture, filesystem manipulation, dependency injection, structured logging, automated testing, and containerized execution with Docker.
 
 ![Python](https://img.shields.io/badge/Python-3.14+-blue)
 ![Architecture](https://img.shields.io/badge/Architecture-Layered-orange)
+![Docker](https://img.shields.io/badge/Docker-Supported-2496ED?logo=docker)
 ![Tests](https://img.shields.io/badge/Tests-Pytest-green)
 ![Package Manager](https://img.shields.io/badge/Package_Manager-uv-purple)
 
@@ -13,25 +14,28 @@ The application scans a directory, classifies files (images, documents, videos, 
 
 ## Features
 
-- Automatically organizes files by category
-- Supports multiple file types and extensions
+- Organizes files into category-specific directories
+- Supports images, documents, videos, archives, audio, development files, and more
 - Creates destination folders automatically
-- Prevents file overwriting by generating unique filenames
+- Prevents filename collisions by generating unique names
 - Handles invalid directories and unexpected errors gracefully
 - Provides centralized JSON logging
 - Includes unit and integration tests
 - Supports Windows, macOS, and Linux
+- Can be executed locally or inside a Docker container
 
 ---
 
 ## Architecture
 
-The project follows a layered architecture that separates business logic, domain rules, and infrastructure concerns into independent layers.
+The application follows a layered architecture that separates business logic, domain rules, and infrastructure concerns.
 
 ### Architecture Diagram
 
 <p align="center">
-  <img src="file-organizer-architecrure.svg" alt="File Organizer Architecture Diagram" width="900">
+    <img src="file-organizer-architecrure.svg"
+         alt="File Organizer Architecture Diagram"
+         width="900">
 </p>
 
 ### Project Structure
@@ -60,44 +64,20 @@ file_organizer/
 │
 ├── tests/
 │
+├── Dockerfile
+├── pyproject.toml
+├── uv.lock
 └── main.py
 ```
 
-### Domain Layer
+### Layer Responsibilities
 
-Contains the core entities and business rules.
-
-| Component | Responsibility |
-|-----------|----------------|
-| `FileInfo` | Represents file metadata |
-| `EXTENSION_MAPPING` | Defines file categorization rules |
-
-### Application Layer
-
-Contains the application's business logic.
-
-| Component | Responsibility |
-|-----------|----------------|
-| `OrganizeFilesUseCase` | Coordinates the file organization workflow |
-| `FileClassifier` | Maps file extensions to categories |
-
-### Infrastructure Layer
-
-Handles communication with the operating system and external libraries.
-
-| Component | Responsibility |
-|-----------|----------------|
-| `FileScanner` | Scans directories and retrieves files |
-| `FileMover` | Moves files to destination folders |
-| `LoggingConfiguration` | Configures centralized logging |
-
-### Entry Point
-
-`main.py` is responsible for:
-
-- collecting user input
-- initializing application dependencies
-- executing the file organization workflow
+| Layer | Responsibility |
+|--------|----------------|
+| **Domain** | Business entities and file categorization rules |
+| **Application** | Coordinates the file organization workflow |
+| **Infrastructure** | Filesystem access and logging |
+| **Entry Point** | Initializes dependencies and starts the application |
 
 ---
 
@@ -114,7 +94,6 @@ Handles communication with the operating system and external libraries.
 | Development | py, js, ts, html, css, json, xml, yaml, yml, sh, bat, c, cpp, java, go |
 | Books | epub, mobi, fb2, djvu |
 | Design | psd, ai, fig, blend, dwg, stl |
-| Other | Unsupported file types |
 
 ---
 
@@ -138,43 +117,57 @@ uv sync
 
 ## Usage
 
-Run the application:
+Run the application locally:
 
 ```bash
 uv run main.py
 ```
 
-The application will prompt for a directory path:
+When prompted, enter the directory to organize.
 
-```text
-Enter the directory to organize:
-```
-
-Examples:
+Example:
 
 ```text
 ~/Desktop/Downloads
 ```
 
-```text
-C:\Users\Username\Downloads
+---
+
+## Running with Docker
+
+Build the image:
+
+```bash
+docker build -t file-organizer .
 ```
+
+Run the container and mount the current directory:
+
+```bash
+docker run -it --rm \
+    -v "$(pwd)":/data \
+    file-organizer
+```
+
+The mounted directory is automatically used as the target directory, so no additional input is required.
 
 ---
 
-## Running Tests
+## Testing
 
-Run all tests:
+Run the complete test suite:
 
 ```bash
 uv run pytest
 ```
 
+---
+
 ## Logging
 
-The application uses centralized JSON logging to provide visibility into the execution flow.
+The application uses centralized structured JSON logging.
 
-Example:
+Example output:
 
 ```json
 {
@@ -186,34 +179,21 @@ Example:
 
 ---
 
-## Technologies
+## Tech Stack
 
-- Python
+- Python 3.14
 - uv
+- Docker
+- os
 - pathlib
 - shutil
 - logging
-- dataclasses
-- pytest
 - python-json-logger
-
----
-
-## Learning Objectives
-
-This project was built to practice:
-
-- Layered Architecture
-- Object-Oriented Programming (OOP)
-- Dependency Injection
-- Filesystem operations
-- Error handling
-- Centralized logging
-- Automated testing with Pytest
-- Writing maintainable and modular Python code
+- pytest
+- dataclasses
 
 ---
 
 ## License
 
-This project was created for educational and portfolio purposes.
+Created for educational and portfolio purposes.
