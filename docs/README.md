@@ -135,21 +135,28 @@ Example:
 
 ## Running with Docker
 
-Build the image:
+Build the Docker image from the project root:
 
 ```bash
 docker build -t file-organizer .
 ```
 
-Run the container and mount the current directory:
+Navigate to the directory you want to organize and run the container.
+
+**macOS / Linux**
 
 ```bash
-docker run -it --rm \
-    -v "$(pwd)":/data \
-    file-organizer
+docker run -it --rm -v "$(pwd):/data" file-organizer
 ```
 
-The mounted directory is automatically used as the target directory, so no additional input is required.
+**Windows (PowerShell)**
+
+```powershell
+docker run -it --rm -v "${PWD}:/data" file-organizer
+```
+
+The current directory is mounted into the container as `/data` and is automatically used as the target directory for file organization.
+
 
 ---
 

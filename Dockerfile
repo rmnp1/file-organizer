@@ -8,6 +8,6 @@ WORKDIR /app
 
 RUN uv sync --locked
 
-ENV TARGET_DIR /data
+ENV TARGET_DIR=/data
 
 CMD ["uv", "run", "main.py"]
